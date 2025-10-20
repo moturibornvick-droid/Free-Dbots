@@ -1,0 +1,301 @@
+<xml xmlns="http://www.w3.org/1999/xhtml" collection="false">
+  <variables>
+    <variable type="" id="v_pred">Prediction</variable>
+    <variable type="" id="v_time">Time</variable>
+    <variable type="" id="v_init_stake">InitialStake</variable>
+    <variable type="" id="v_cur_stake">CurrentStake</variable>
+    <variable type="" id="v_mg_factor">MartingaleFactor</variable>
+    <variable type="" id="v_mg_steps">MGSteps</variable>
+    <variable type="" id="v_loss_streak">LossStreak</variable>
+    <variable type="" id="v_tp">TakeProfit</variable>
+    <variable type="" id="v_sl">StopLoss</variable>
+    <variable type="" id="v_max_mg">MaxMG</variable>
+  </variables>
+
+  <!-- Trade block: DIGITDIFF on R_100, 1-tick duration -->
+  <block type="trade" id="trade_differs" x="0" y="0">
+    <field name="MARKET_LIST">synthetic_index</field>
+    <field name="SUBMARKET_LIST">random_index</field>
+    <field name="SYMBOL_LIST">R_100</field>
+    <field name="TRADETYPECAT_LIST">digits</field>
+    <field name="TRADETYPE_LIST">overunder</field>
+    <field name="TYPE_LIST">DIGITDIFF</field>
+    <field name="CANDLEINTERVAL_LIST">1</field>
+    <field name="TIME_MACHINE_ENABLED">FALSE</field>
+    <field name="RESTARTONERROR">TRUE</field>
+
+    <!-- Initialization -->
+    <statement name="INITIALIZATION">
+      <block type="variables_set" id="init1">
+        <field name="VAR" id="v_pred">Prediction</field>
+        <value name="VALUE">
+          <block type="math_number" id="num_pred"><field name="NUM">differs</field></block>
+        </value>
+        <next>
+          <block type="variables_set" id="init2">
+            <field name="VAR" id="v_time">Time</field>
+            <value name="VALUE">
+              <block type="math_number" id="num_time"><field name="NUM">1</field></block>
+            </value>
+            <next>
+              <block type="variables_set" id="init3">
+                <field name="VAR" id="v_init_stake">InitialStake</field>
+                <value name="VALUE">
+                  <block type="math_number" id="num_stake"><field name="NUM">0.35</field></block>
+                </value>
+                <next>
+                  <block type="variables_set" id="init4">
+                    <field name="VAR" id="v_cur_stake">CurrentStake</field>
+                    <value name="VALUE">
+                      <block type="variables_get" id="get_init"><field name="VAR" id="v_init_stake">InitialStake</field></block>
+                    </value>
+                    <next>
+                      <block type="variables_set" id="init5">
+                        <field name="VAR" id="v_mg_factor">MartingaleFactor</field>
+                        <value name="VALUE">
+                          <block type="math_number" id="num_mg"><field name="NUM">2.3</field></block>
+                        </value>
+                        <next>
+                          <block type="variables_set" id="init6">
+                            <field name="VAR" id="v_mg_steps">MGSteps</field>
+                            <value name="VALUE">
+                              <block type="math_number" id="num_mg_steps"><field name="NUM">0</field></block>
+                            </value>
+                            <next>
+                              <block type="variables_set" id="init7">
+                                <field name="VAR" id="v_loss_streak">LossStreak</field>
+                                <value name="VALUE">
+                                  <block type="math_number" id="num_loss"><field name="NUM">0</field></block>
+                                </value>
+                                <next>
+                                  <block type="variables_set" id="init8">
+                                    <field name="VAR" id="v_tp">TakeProfit</field>
+                                    <value name="VALUE">
+                                      <block type="math_number" id="num_tp"><field name="NUM">10</field></block>
+                                    </value>
+                                    <next>
+                                      <block type="variables_set" id="init9">
+                                        <field name="VAR" id="v_sl">StopLoss</field>
+                                        <value name="VALUE">
+                                          <block type="math_number" id="num_sl"><field name="NUM">30</field></block>
+                                        </value>
+                                        <next>
+                                          <block type="variables_set" id="init10">
+                                            <field name="VAR" id="v_max_mg">MaxMG</field>
+                                            <value name="VALUE">
+                                              <block type="math_number" id="num_maxmg"><field name="NUM">5</field></block>
+                                            </value>
+                                          </block>
+                                        </next>
+                                      </block>
+                                    </next>
+                                  </block>
+                                </next>
+                              </block>
+                            </next>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </statement>
+
+    <!-- Trade options: duration 1 tick, amount current stake -->
+    <statement name="SUBMARKET">
+      <block type="tradeOptions" id="opts">
+        <field name="DURATIONTYPE_LIST">t</field>
+        <field name="CURRENCY_LIST">USD</field>
+        <field name="BARRIEROFFSETTYPE_LIST">+</field>
+        <field name="SECONDBARRIEROFFSETTYPE_LIST">-</field>
+        <value name="DURATION">
+          <block type="variables_get" id="get_time"><field name="VAR" id="v_time">Time</field></block>
+        </value>
+        <value name="AMOUNT">
+          <block type="variables_get" id="get_amount"><field name="VAR" id="v_cur_stake">CurrentStake</field></block>
+        </value>
+        <value name="PREDICTION">
+          <block type="text" id="txt_differs"><field name="TEXT">differs</field></block>
+        </value>
+      </block>
+    </statement>
+  </block>
+
+  <!-- BEFORE PURCHASE: immediate purchase every tick (fast execution) -->
+  <block type="before_purchase" id="before" x="0" y="420">
+    <statement name="BEFOREPURCHASE_STACK">
+      <block type="purchase" id="buy_now">
+        <field name="PURCHASE_LIST">DIGITDIFF</field>
+      </block>
+    </statement>
+  </block>
+
+  <!-- AFTER PURCHASE: update results, apply martingale, check TP/SL -->
+  <block type="after_purchase" id="after" x="0" y="720">
+    <statement name="AFTERPURCHASE_STACK">
+      <block type="controls_if" id="after_if">
+        <mutation else="1"></mutation>
+        <value name="IF0">
+          <block type="contract_check_result" id="check_win">
+            <field name="CHECK_RESULT">win</field>
+          </block>
+        </value>
+
+        <!-- WIN branch: reset stake and martingale -->
+        <statement name="DO0">
+          <block type="variables_set" id="win_reset_stake">
+            <field name="VAR" id="v_cur_stake">CurrentStake</field>
+            <value name="VALUE">
+              <block type="variables_get" id="get_init_reset"><field name="VAR" id="v_init_stake">InitialStake</field></block>
+            </value>
+            <next>
+              <block type="variables_set" id="win_reset_mg">
+                <field name="VAR" id="v_mg_steps">MGSteps</field>
+                <value name="VALUE"><block type="math_number" id="zero_mg"><field name="NUM">0</field></block></value>
+                <next>
+                  <block type="variables_set" id="win_reset_loss">
+                    <field name="VAR" id="v_loss_streak">LossStreak</field>
+                    <value name="VALUE"><block type="math_number" id="zero_loss"><field name="NUM">0</field></block></value>
+                    <next>
+                      <block type="notify" id="notify_win">
+                        <field name="NOTIFICATION_TYPE">success</field>
+                        <field name="NOTIFICATION_SOUND">silent</field>
+                        <value name="MESSAGE">
+                          <block type="text_join" id="join_win">
+                            <mutation items="2"></mutation>
+                            <value name="ADD0"><block type="text"><field name="TEXT">WIN — Total Profit: </field></block></value>
+                            <value name="ADD1"><block type="total_profit" id="tp_win"></block></value>
+                          </block>
+                        </value>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </statement>
+
+        <!-- LOSS / else branch -->
+        <statement name="ELSE">
+          <block type="notify" id="notify_loss">
+            <field name="NOTIFICATION_TYPE">warn</field>
+            <field name="NOTIFICATION_SOUND">silent</field>
+            <value name="MESSAGE">
+              <block type="text_join" id="join_loss">
+                <mutation items="2"></mutation>
+                <value name="ADD0"><block type="text"><field name="TEXT">LOSS — Total Profit: </field></block></value>
+                <value name="ADD1"><block type="total_profit" id="tp_loss"></block></value>
+              </block>
+            </value>
+            <next>
+              <!-- increment LossStreak -->
+              <block type="math_change" id="inc_loss">
+                <field name="VAR" id="v_loss_streak">LossStreak</field>
+                <value name="DELTA"><block type="math_number"><field name="NUM">1</field></block></value>
+                <next>
+                  <!-- increment MGSteps -->
+                  <block type="math_change" id="inc_mg">
+                    <field name="VAR" id="v_mg_steps">MGSteps</field>
+                    <value name="DELTA"><block type="math_number"><field name="NUM">1</field></block></value>
+                    <next>
+                      <!-- If MGSteps <= MaxMG then apply martingale -->
+                      <block type="controls_if" id="mg_check">
+                        <mutation else="1"></mutation>
+                        <value name="IF0">
+                          <block type="logic_compare" id="cmp_mg_steps">
+                            <field name="OP">LTE</field>
+                            <value name="A"><block type="variables_get" id="get_mg_steps"><field name="VAR" id="v_mg_steps">MGSteps</field></block></value>
+                            <value name="B"><block type="variables_get" id="get_max_mg"><field name="VAR" id="v_max_mg">MaxMG</field></block></value>
+                          </block>
+                        </value>
+                        <statement name="DO0">
+                          <block type="variables_set" id="apply_mg">
+                            <field name="VAR" id="v_cur_stake">CurrentStake</field>
+                            <value name="VALUE">
+                              <block type="math_arithmetic" id="calc_mg"><field name="OP">MULTIPLY</field>
+                                <value name="A"><block type="variables_get" id="get_cur"><field name="VAR" id="v_cur_stake">CurrentStake</field></block></value>
+                                <value name="B"><block type="variables_get" id="get_mg"><field name="VAR" id="v_mg_factor">MartingaleFactor</field></block></value>
+                              </block>
+                            </value>
+                          </block>
+                        </statement>
+                        <statement name="ELSE">
+                          <block type="notify" id="notify_max_mg">
+                            <field name="NOTIFICATION_TYPE">error</field>
+                            <field name="NOTIFICATION_SOUND">silent</field>
+                            <value name="MESSAGE"><block type="text"><field name="TEXT">Max martingale reached — stopping bot.</field></block></value>
+                            <next><block type="stop" id="stop_maxmg"></block></next>
+                          </block>
+                        </statement>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </statement>
+
+        <!-- After win or loss: check TakeProfit / StopLoss -->
+        <next>
+          <block type="controls_if" id="tp_sl_check">
+            <mutation else="1"></mutation>
+            <value name="IF0">
+              <block type="logic_operation" id="op_tp_sl">
+                <field name="OP">OR</field>
+                <value name="A">
+                  <block type="logic_compare" id="cmp_tp">
+                    <field name="OP">GTE</field>
+                    <value name="A"><block type="total_profit" id="tp_check"></block></value>
+                    <value name="B"><block type="variables_get" id="get_tp"><field name="VAR" id="v_tp">TakeProfit</field></block></value>
+                  </block>
+                </value>
+                <value name="B">
+                  <block type="logic_compare" id="cmp_sl">
+                    <field name="OP">LTE</field>
+                    <value name="A"><block type="total_profit" id="tp_check2"></block></value>
+                    <value name="B">
+                      <block type="math_arithmetic" id="neg_sl"><field name="OP">MULTIPLY</field>
+                        <value name="A"><block type="variables_get" id="get_sl"><field name="VAR" id="v_sl">StopLoss</field></block></value>
+                        <value name="B"><block type="math_number" id="neg1"><field name="NUM">-1</field></block></value>
+                      </block>
+                    </value>
+                  </block>
+                </value>
+              </block>
+            </value>
+
+            <statement name="DO0">
+              <block type="notify" id="notify_stop">
+                <field name="NOTIFICATION_TYPE">info</field>
+                <field name="NOTIFICATION_SOUND">silent</field>
+                <value name="MESSAGE">
+                  <block type="text_join" id="join_stop">
+                    <mutation items="2"></mutation>
+                    <value name="ADD0"><block type="text"><field name="TEXT">Target reached — stopping. Total Profit: </field></block></value>
+                    <value name="ADD1"><block type="total_profit" id="tp_end"></block></value>
+                  </block>
+                </value>
+                <next><block type="stop" id="final_stop"></block></next>
+              </block>
+            </statement>
+
+            <statement name="ELSE">
+              <!-- otherwise continue trading immediately for next tick -->
+              <block type="trade_again" id="reentry"></block>
+            </statement>
+          </block>
+        </next>
+      </block>
+    </statement>
+  </block>
+</xml>
+
+      
+                  
