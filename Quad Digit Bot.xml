@@ -1,484 +1,228 @@
-<xml xmlns="http://www.w3.org/1999/xhtml" collection="false">
-  <variables>
-    <variable type="" id="6o_9Nu#$3m#.?zV=ahjK">Prediction</variable>
-    <variable type="" id="rUPB[)tUi3we;byHr`7]">Time</variable>
-    <variable type="" id="RHgF*C%#h{|Ha5u;#5j?">Initial Amount</variable>
-    <variable type="" id="K[O?$oC@acQqB^+{4rY7">Digit</variable>
-    <variable type="" id="FlX%77!9AMWGEu#,)Nme">Stop Loss</variable>
-    <variable type="" id="(obU$~2J]hr/k0`hgX8/">Win Amount</variable>
-    <variable type="" id="a?$LW}C4v+XX:Lc%6-OS">Expected Profit</variable>
-  </variables>
-  <block type="trade" id="73vWdDagX-YhN)CtN.3D" x="0" y="0">
-    <field name="MARKET_LIST">synthetic_index</field>
-    <field name="SUBMARKET_LIST">random_index</field>
-    <field name="SYMBOL_LIST">R_100</field>
-    <field name="TRADETYPECAT_LIST">digits</field>
-    <field name="TRADETYPE_LIST">overunder</field>
-    <field name="TYPE_LIST">DIGITOVER</field>
-    <field name="CANDLEINTERVAL_LIST">60</field>
-    <field name="TIME_MACHINE_ENABLED">FALSE</field>
-    <field name="RESTARTONERROR">FALSE</field>
-    <statement name="INITIALIZATION">
-      <block type="variables_set" id="u,R7-Nu^~551j4g.zS|8">
-        <field name="VAR" id="6o_9Nu#$3m#.?zV=ahjK" variabletype="">Prediction</field>
-        <value name="VALUE">
-          <block type="math_number" id="[fC#3g!$y1n1gQW$zaIo">
-            <field name="NUM">4</field>
-          </block>
-        </value>
-        <next>
-          <block type="variables_set" id="x)_.vX,}axj7ue%jgpB%">
-            <field name="VAR" id="rUPB[)tUi3we;byHr`7]" variabletype="">Time</field>
-            <value name="VALUE">
-              <block type="math_number" id="/+(-C^ny^Xp*I0ORP+(Z">
-                <field name="NUM">10</field>
-              </block>
-            </value>
-            <next>
-              <block type="variables_set" id="/NVp1yW?GfJb3z!3W#:#">
-                <field name="VAR" id="K[O?$oC@acQqB^+{4rY7" variabletype="">Digit</field>
-                <value name="VALUE">
-                  <block type="math_number" id="eIvT*uvWFWLd6U$%986N">
-                    <field name="NUM">0</field>
-                  </block>
-                </value>
-                <next>
-                  <block type="variables_set" id="7$DpM}CfwF3d$90e/zl.">
-                    <field name="VAR" id="FlX%77!9AMWGEu#,)Nme" variabletype="">Stop Loss</field>
-                    <value name="VALUE">
-                      <block type="math_number" id="B5.#mSmH+4DCajri?O^)">
-                        <field name="NUM">100</field>
-                      </block>
-                    </value>
-                    <next>
-                      <block type="variables_set" id="B;eMO~A9Lf+xq/|ki):+">
-                        <field name="VAR" id="a?$LW}C4v+XX:Lc%6-OS" variabletype="">Expected Profit</field>
-                        <value name="VALUE">
-                          <block type="math_number" id="V@QyhA`C-+G(cBh;nDw/">
-                            <field name="NUM">9</field>
-                          </block>
-                        </value>
-                        <next>
-                          <block type="variables_set" id=":f!4st:(Zr-9$VzeN!t1">
-                            <field name="VAR" id="RHgF*C%#h{|Ha5u;#5j?" variabletype="">Initial Amount</field>
-                            <value name="VALUE">
-                              <block type="math_number" id="c){g[eNu^YVU(twpc~l_">
-                                <field name="NUM">1</field>
-                              </block>
-                            </value>
-                            <next>
-                              <block type="variables_set" id="sLAf)u(fNS7|z6B/o~vq">
-                                <field name="VAR" id="(obU$~2J]hr/k0`hgX8/" variabletype="">Win Amount</field>
-                                <value name="VALUE">
-                                  <block type="math_number" id="vn;tZO~32h!oL%x+0EHh">
-                                    <field name="NUM">1</field>
-                                  </block>
-                                </value>
-                              </block>
-                            </next>
-                          </block>
-                        </next>
-                      </block>
-                    </next>
-                  </block>
-                </next>
-              </block>
-            </next>
-          </block>
-        </next>
-      </block>
-    </statement>
-    <statement name="SUBMARKET">
-      <block type="tradeOptions" id="Drl9/3]qn-5#Nt.L0n!W">
-        <field name="DURATIONTYPE_LIST">t</field>
-        <field name="CURRENCY_LIST">USD</field>
-        <field name="BARRIEROFFSETTYPE_LIST">+</field>
-        <field name="SECONDBARRIEROFFSETTYPE_LIST">-</field>
-        <value name="DURATION">
-          <block type="variables_get" id="!}`,B|ht[bbq}q2*NFVO">
-            <field name="VAR" id="rUPB[)tUi3we;byHr`7]" variabletype="">Time</field>
-          </block>
-        </value>
-        <value name="AMOUNT">
-          <block type="variables_get" id="_O2;ISV-U:YYoPN3Qczm">
-            <field name="VAR" id="RHgF*C%#h{|Ha5u;#5j?" variabletype="">Initial Amount</field>
-          </block>
-        </value>
-        <value name="PREDICTION">
-          <block type="variables_get" id="nQF/wk5(L8q4Cj5Hz3%/">
-            <field name="VAR" id="6o_9Nu#$3m#.?zV=ahjK" variabletype="">Prediction</field>
-          </block>
-        </value>
-      </block>
-    </statement>
-  </block>
-  <block type="before_purchase" id="tOc)]Xd=cAm0aiy+-8(8" x="0" y="615">
-    <statement name="BEFOREPURCHASE_STACK">
-      <block type="notify" id="2%^bZ/o?Qxvoj5rc$8[!">
-        <field name="NOTIFICATION_TYPE">success</field>
-        <field name="NOTIFICATION_SOUND">silent</field>
-        <value name="MESSAGE">
-          <block type="last_digit" id="jHJ*wIj_f-#mYR|j,YgH"></block>
-        </value>
-        <next>
-          <block type="controls_if" id="/))#3SKXiduHDLO$4LL4" collapsed="true">
-            <mutation else="1"></mutation>
-            <value name="IF0">
-              <block type="logic_compare" id="Ys,P2iFG=FApiWax]au{">
-                <field name="OP">EQ</field>
-                <value name="A">
-                  <block type="last_digit" id="%o2*FF$QG-f@uNK}2p)K"></block>
-                </value>
-                <value name="B">
-                  <block type="math_number" id="lfRfTs[t0,blj(@Q95Y|">
-                    <field name="NUM">1</field>
-                  </block>
-                </value>
-              </block>
-            </value>
-            <statement name="DO0">
-              <block type="variables_set" id="+(AYk.$Sd166[rs,(60Z">
-                <field name="VAR" id="K[O?$oC@acQqB^+{4rY7" variabletype="">Digit</field>
-                <value name="VALUE">
-                  <block type="math_number" id="T$RXxP-ZIfQs1Ny!{QGl">
-                    <field name="NUM">4</field>
-                  </block>
-                </value>
-              </block>
-            </statement>
-            <statement name="ELSE">
-              <block type="controls_if" id="C+wZ_mp}+JM`SY|O,sDa">
-                <value name="IF0">
-                  <block type="logic_operation" id="xU]EoB+1=#W*CXl~w~DO">
-                    <field name="OP">OR</field>
-                    <value name="A">
-                      <block type="logic_compare" id="5`[`29dr2xti8I+aE,Se">
-                        <field name="OP">EQ</field>
-                        <value name="A">
-                          <block type="last_digit" id="htVN3GH/p2|xwN^]{!2-"></block>
-                        </value>
-                        <value name="B">
-                          <block type="math_number" id="H|EbMQvM2oE3pnBpoa?z">
-                            <field name="NUM">7</field>
-                          </block>
-                        </value>
-                      </block>
-                    </value>
-                  </block>
-                </value>
-                <statement name="DO0">
-                  <block type="variables_set" id="TOQ9w2QMg8h)x3gbRPkB">
-                    <field name="VAR" id="rUPB[)tUi3we;byHr`7]" variabletype="">Time</field>
-                    <value name="VALUE">
-                      <block type="math_number" id="P*5UEus*FXn~2$SK]{|+">
-                        <field name="NUM">1</field>
-                      </block>
-                    </value>
-                    <next>
-                      <block type="purchase" id="}}lKjKyaE+zBH:t98m!j">
-                        <field name="PURCHASE_LIST">DIGITOVER</field>
-                      </block>
-                    </next>
-                  </block>
-                </statement>
-                <next>
-                  <block type="variables_set" id="gSHkj)E2]2#bvC*%wLUK">
-                    <field name="VAR" id="K[O?$oC@acQqB^+{4rY7" variabletype="">Digit</field>
-                    <value name="VALUE">
-                      <block type="math_number" id="5AWia*xwPc.cF/R:0.w9">
-                        <field name="NUM">0</field>
-                      </block>
-                    </value>
-                  </block>
-                </next>
-              </block>
-            </statement>
-          </block>
-        </next>
-      </block>
-    </statement>
-  </block>
-  <block type="after_purchase" id="Vt,CkLeK8E?%BmnB`~M)" collapsed="true" x="1" y="784">
-    <statement name="AFTERPURCHASE_STACK">
-      <block type="controls_if" id="%@(f!*AdEFLsr!3OgGRm">
-        <mutation else="1"></mutation>
-        <value name="IF0">
-          <block type="contract_check_result" id=":BL^MmsJ02#UKpQ48{^*">
-            <field name="CHECK_RESULT">win</field>
-          </block>
-        </value>
-        <statement name="DO0">
-          <block type="notify" id="0CPvA3`lf@Qx[ek{^V[y">
-            <field name="NOTIFICATION_TYPE">success</field>
-            <field name="NOTIFICATION_SOUND">silent</field>
-            <value name="MESSAGE">
-              <block type="text_join" id="}#lG|6v#h3a}q2JqY=$v">
-                <mutation items="2"></mutation>
-                <value name="ADD0">
-                  <block type="text" id="3J^K2hCy.2g!jJdo}hH8">
-                    <field name="TEXT">Won:</field>
-                  </block>
-                </value>
-                <value name="ADD1">
-                  <block type="read_details" id="?eO3`-cS%?ftQ.7kJAT3">
-                    <field name="DETAIL_INDEX">4</field>
-                  </block>
-                </value>
-              </block>
-            </value>
-            <next>
-              <block type="variables_set" id="D(ZO{D)lA3-iiF]y!6!x">
-                <field name="VAR" id="RHgF*C%#h{|Ha5u;#5j?" variabletype="">Initial Amount</field>
-                <value name="VALUE">
-                  <block type="variables_get" id="}9dc,i+B~Fp+4uMEE3Aa">
-                    <field name="VAR" id="(obU$~2J]hr/k0`hgX8/" variabletype="">Win Amount</field>
-                  </block>
-                </value>
-                <next>
-                  <block type="variables_set" id="/.goJP{,xSkeBaeexOAu">
-                    <field name="VAR" id="6o_9Nu#$3m#.?zV=ahjK" variabletype="">Prediction</field>
-                    <value name="VALUE">
-                      <block type="math_number" id="Wx]F=4z81I/t(**afQ7X">
-                        <field name="NUM">4</field>
-                      </block>
-                    </value>
-                    <next>
-                      <block type="variables_set" id=",xmb@Yu-Vz$bmryVU(-.">
-                        <field name="VAR" id="K[O?$oC@acQqB^+{4rY7" variabletype="">Digit</field>
-                        <value name="VALUE">
-                          <block type="math_number" id="U]VRaP3`T5XwRZDrQM7(">
-                            <field name="NUM">0</field>
-                          </block>
-                        </value>
-                        <next>
-                          <block type="variables_set" id="#bSB2ou8QtdNr6ah%(!%">
-                            <field name="VAR" id="rUPB[)tUi3we;byHr`7]" variabletype="">Time</field>
-                            <value name="VALUE">
-                              <block type="math_number" id="Yn|!V9VkplP5T;$-bm@t">
-                                <field name="NUM">1</field>
-                              </block>
-                            </value>
-                            <next>
-                              <block type="trade_again" id="Q|q(U%EWQ!fcEv4]K`1I"></block>
-                            </next>
-                          </block>
-                        </next>
-                      </block>
-                    </next>
-                  </block>
-                </next>
-              </block>
-            </next>
-          </block>
-        </statement>
-        <statement name="ELSE">
-          <block type="notify" id="Ehu]|xXGT`7FQm+T7d.x">
-            <field name="NOTIFICATION_TYPE">warn</field>
-            <field name="NOTIFICATION_SOUND">silent</field>
-            <value name="MESSAGE">
-              <block type="text_join" id="]EMN%A~bIm;o(z2VK|=N">
-                <mutation items="2"></mutation>
-                <value name="ADD0">
-                  <block type="text" id="*aZ4UaY)gMFIX]~i-yno">
-                    <field name="TEXT">Lost: </field>
-                  </block>
-                </value>
-                <value name="ADD1">
-                  <block type="math_single" id="iGI33:%7T@Q9F3Q$cj/d">
-                    <field name="OP">ABS</field>
-                    <value name="NUM">
-                      <shadow type="math_number" id="GleSn`9j7Cm7/dqg}FIA">
-                        <field name="NUM">9</field>
-                      </shadow>
-                      <block type="read_details" id="/R4%(Bkmq@1{v=)3~+`K">
-                        <field name="DETAIL_INDEX">4</field>
-                      </block>
-                    </value>
-                  </block>
-                </value>
-              </block>
-            </value>
-            <next>
-              <block type="variables_set" id="PH6%wf,w=?d5H;`iTf7d">
-                <field name="VAR" id="rUPB[)tUi3we;byHr`7]" variabletype="">Time</field>
-                <value name="VALUE">
-                  <block type="math_number" id="V|V9)FK:?kphhRoawjPP">
-                    <field name="NUM">1</field>
-                  </block>
-                </value>
-                <next>
-                  <block type="variables_set" id="Zf5QC7z#:l8Mj8NoS.T;">
-                    <field name="VAR" id="6o_9Nu#$3m#.?zV=ahjK" variabletype="">Prediction</field>
-                    <value name="VALUE">
-                      <block type="math_number" id="#ICa+C|eMc#ii5VjsuwW">
-                        <field name="NUM">1</field>
-                      </block>
-                    </value>
-                    <next>
-                      <block type="math_change" id="x`$EMk22j5gni:inwaV%">
-                        <field name="VAR" id="RHgF*C%#h{|Ha5u;#5j?" variabletype="">Initial Amount</field>
-                        <value name="DELTA">
-                          <shadow type="math_number" id="N=Vo^MVz~/^(xt7Ag@8E">
-                            <field name="NUM">1</field>
-                          </shadow>
-                          <block type="math_arithmetic" id="ybrHyqE5`dPce5~:IM6X">
-                            <field name="OP">MULTIPLY</field>
-                            <value name="A">
-                              <shadow type="math_number" id="ka8n8|Dugz,q5FkUjs`7">
-                                <field name="NUM">1</field>
-                              </shadow>
-                              <block type="math_single" id="M+EqBr|L{ogw_9@9!IeC">
-                                <field name="OP">ABS</field>
-                                <value name="NUM">
-                                  <shadow type="math_number" id="GleSn`9j7Cm7/dqg}FIA">
-                                    <field name="NUM">9</field>
-                                  </shadow>
-                                  <block type="read_details" id="ruY#E|o:+gfL(,7U(M9~">
-                                    <field name="DETAIL_INDEX">4</field>
-                                  </block>
-                                </value>
-                              </block>
-                            </value>
-                            <value name="B">
-                              <shadow type="math_number" id="Abq76oW2o,PI!P+T;QV~">
-                                <field name="NUM">1</field>
-                              </shadow>
-                              <block type="math_number" id="oq5_=hBu{b]})41;=Ss~">
-                                <field name="NUM">4.1</field>
-                              </block>
-                            </value>
-                          </block>
-                        </value>
-                      </block>
-                    </next>
-                  </block>
-                </next>
-              </block>
-            </next>
-          </block>
-        </statement>
-        <next>
-          <block type="notify" id="Kog`8sYejbZH+QB{`reM">
-            <field name="NOTIFICATION_TYPE">info</field>
-            <field name="NOTIFICATION_SOUND">silent</field>
-            <value name="MESSAGE">
-              <block type="text_join" id="55JmTJH?bskwXB52rqVf">
-                <mutation items="2"></mutation>
-                <value name="ADD0">
-                  <block type="text" id="XU]tD=44aE|[c}sM8:4!">
-                    <field name="TEXT">Total Profit: </field>
-                  </block>
-                </value>
-                <value name="ADD1">
-                  <block type="total_profit" id="YQ_Dw5|,IaKz?P5p[(8;"></block>
-                </value>
-              </block>
-            </value>
-            <next>
-              <block type="controls_if" id="y4b5tND%4SQn=!mZ]`^w">
-                <mutation else="1"></mutation>
-                <value name="IF0">
-                  <block type="logic_compare" id="M%g=^S=Y}e2~K`jii|LJ">
-                    <field name="OP">LT</field>
-                    <value name="A">
-                      <block type="total_profit" id="0FGcI6=.T.DLn~uGsZ-G"></block>
-                    </value>
-                    <value name="B">
-                      <block type="variables_get" id="v^^;%Bh_`{e5c9PqU{B#">
-                        <field name="VAR" id="a?$LW}C4v+XX:Lc%6-OS" variabletype="">Expected Profit</field>
-                      </block>
-                    </value>
-                  </block>
-                </value>
-                <statement name="DO0">
-                  <block type="controls_if" id="s+Dt4T~D;?fugJoM2PJA">
-                    <mutation else="1"></mutation>
-                    <value name="IF0">
-                      <block type="logic_operation" id="9jpE.-|$Ne$(|QX-X7Ja">
-                        <field name="OP">AND</field>
-                        <value name="A">
-                          <block type="math_number_property" id="yW1^m!z(h%;m}Vfe#r@^">
-                            <mutation divisor_input="false"></mutation>
-                            <field name="PROPERTY">NEGATIVE</field>
-                            <value name="NUMBER_TO_CHECK">
-                              <shadow type="math_number" id="2TJ^lPjT8MrR^:6Ghug=">
-                                <field name="NUM">0</field>
-                              </shadow>
-                              <block type="total_profit" id="uqlDU#QMdm-s]jyv]$B#"></block>
-                            </value>
-                          </block>
-                        </value>
-                        <value name="B">
-                          <block type="logic_compare" id="mrZXmIf1M3D#D?y=JbT?">
-                            <field name="OP">GTE</field>
-                            <value name="A">
-                              <block type="math_single" id="fw)cikPK0d%U_O_!`*UO">
-                                <field name="OP">ABS</field>
-                                <value name="NUM">
-                                  <shadow type="math_number" id="(rCiW:kP-Kx+n[/lS.n{">
-                                    <field name="NUM">9</field>
-                                  </shadow>
-                                  <block type="total_profit" id="G[25$kY~T~gCVfYR+0gT"></block>
-                                </value>
-                              </block>
-                            </value>
-                            <value name="B">
-                              <block type="variables_get" id="kMaqW~2,vwv=ESaSZV8W">
-                                <field name="VAR" id="FlX%77!9AMWGEu#,)Nme" variabletype="">Stop Loss</field>
-                              </block>
-                            </value>
-                          </block>
-                        </value>
-                      </block>
-                    </value>
-                    <statement name="DO0">
-                      <block type="text_print" id="pR`ndv1qxV:(EnU;Mg)X">
-                        <value name="TEXT">
-                          <shadow type="text" id="gE|:9BU8CtUSiP@ZF01_">
-                            <field name="TEXT">Stop Loss</field>
-                          </shadow>
-                        </value>
-                      </block>
-                    </statement>
-                    <statement name="ELSE">
-                      <block type="timeout" id="D2a}b~:V-u)c$PCAn@yt">
-                        <statement name="TIMEOUTSTACK">
-                          <block type="trade_again" id="~P7?~]k2eq8EM.LCoA-f"></block>
-                        </statement>
-                        <value name="SECONDS">
-                          <shadow type="math_number" id="MplXkkGB^qe.mLY$wKO#">
-                            <field name="NUM">0</field>
-                          </shadow>
-                        </value>
-                      </block>
-                    </statement>
-                  </block>
-                </statement>
-                <statement name="ELSE">
-                  <block type="text_print" id="3A$xnjUB)LKwKaFCp}~D">
-                    <value name="TEXT">
-                      <shadow type="text" id="kqlrIk.GO.^}hI,PoUV)">
-                        <field name="TEXT">abc</field>
-                      </shadow>
-                      <block type="text_join" id="t${9^A*g2PUV`Z8){*$d">
-                        <mutation items="2"></mutation>
-                        <value name="ADD0">
-                          <block type="text" id="#r|s$$l{nDMieG8N~xdr">
-                            <field name="TEXT">Total Profit :</field>
-                          </block>
-                        </value>
-                        <value name="ADD1">
-                          <block type="total_profit" id="7d=h[LW.:~XXY@WWrcV)"></block>
-                        </value>
-                      </block>
-                    </value>
-                  </block>
-                </statement>
-              </block>
-            </next>
-          </block>
-        </next>
-      </block>
-    </statement>
-  </block>
-</xml>
+# deriv_under8_bot.py
+# Simple Deriv "UNDER 8" digits bot (Python, asyncio + websockets)
+# Requirements: pip install websockets
+# WARNING: Test on demo account. Trading is high risk.
+
+import asyncio
+import websockets
+import json
+from collections import deque
+import time
+import random
+
+# ---------- CONFIG ----------
+API_TOKEN = None   # <-- Put your Deriv API token here (string). If None, bot will NOT place buys (demo/watch mode).
+APP_ID = 1089      # public/demo app_id used in many examples (you can register your own app_id)
+WS_URL = f"wss://ws.derivws.com/websockets/v3?app_id={APP_ID}"
+
+SYMBOL = "R_100"           # synthetic symbol to trade digits on. Change if needed (check active_symbols).
+WINDOW = 20                # how many recent last-digits to analyze
+THRESHOLD = 0.75           # trigger when proportion of digits < 8 >= THRESHOLD (e.g. 0.75 => 75%)
+STAKE = 1.0                # stake per trade (in account currency)
+MAX_TRADES = 200           # safety limit
+DURATION_TICKS = 8         # "under 8" — number of ticks duration for the contract (common for digit strategies)
+MARTINGALE = [1.0, 2.0, 3.0]  # optional stake multipliers on loss (simple martingale)
+AUTO_BUY = True            # if False, the bot will only show proposals (set to False for dry-run)
+VERBOSE = True
+# ----------------------------
+
+def log(*args):
+    if VERBOSE:
+        print(time.strftime("%Y-%m-%d %H:%M:%S"), *args)
+
+class DerivUnder8Bot:
+    def __init__(self, ws, api_token=None):
+        self.ws = ws
+        self.api_token = api_token
+        self.digits = deque(maxlen=WINDOW)
+        self.trade_count = 0
+        self.in_trade = False
+        self.pending_buy_req_id = None
+        self.req_id_counter = 1000
+        self.passthrough_map = {}  # map req_id to metadata
+        self.loss_streak = 0
+
+    def _next_req_id(self):
+        self.req_id_counter += 1
+        return self.req_id_counter
+
+    async def authorize(self):
+        if not self.api_token:
+            log("No API token set — running in monitor / demo-only mode (will not place authenticated buys).")
+            return
+        req = {"authorize": self.api_token}
+        await self.ws.send(json.dumps(req))
+        log("Sent authorize request (token)")
+
+    async def subscribe_ticks(self):
+        # subscribe to tick stream for SYMBOL
+        req = {"ticks": SYMBOL, "subscribe": 1}
+        await self.ws.send(json.dumps(req))
+        log(f"Subscribed to ticks for {SYMBOL}")
+
+    async def request_proposal_and_buy(self, stake):
+        """
+        Request a proposal for DIGITUNDER with barrier 8 and duration in ticks,
+        then buy using the proposal id returned.
+        """
+        # Build proposal request
+        req_id = self._next_req_id()
+        proposal_req = {
+            "proposal": 1,
+            "subscribe": 1,
+            "amount": stake,
+            "basis": "stake",
+            "contract_type": "DIGITUNDER",
+            "symbol": SYMBOL,
+            "duration": DURATION_TICKS,
+            "duration_unit": "t",   # 't' => ticks
+            "barrier": "8",
+            "currency": "USD"       # change if your account uses a different currency
+        }
+        # send proposal (noting req_id in passthrough)
+        echo = {"mode": "under8_bot", "req_id": req_id, "stake": stake}
+        proposal_req["passthrough"] = echo
+        proposal_req["req_id"] = req_id
+
+        await self.ws.send(json.dumps(proposal_req))
+        log(f"Sent proposal request (req_id={req_id}) stake={stake}")
+        # We'll wait for proposal response in the on_message handler
+        return req_id
+
+    async def handle_message(self, msg):
+        # parse JSON from server
+        try:
+            data = json.loads(msg)
+        except Exception:
+            return
+
+        # Authorization response
+        if "authorize" in data:
+            log("Authorize response:", data.get("authorize", {}))
+
+        # ticks response
+        if data.get("tick"):
+            tick = data["tick"]
+            quote = tick.get("quote")
+            if quote is None:
+                return
+            last_digit = int(str(quote)[-1])
+            self.digits.append(last_digit)
+            log(f"Tick: {quote} -> last_digit={last_digit}  window_count={len(self.digits)}")
+
+            # analyze window when full
+            if len(self.digits) == WINDOW and not self.in_trade:
+                count_under8 = sum(1 for d in self.digits if d < 8)
+                ratio = count_under8 / WINDOW
+                log(f"Under8 ratio over last {WINDOW} ticks = {count_under8}/{WINDOW} = {ratio:.2f}")
+                if ratio >= THRESHOLD and self.trade_count < MAX_TRADES:
+                    # determine stake (apply martingale based on loss streak)
+                    mg_index = min(self.loss_streak, len(MARTINGALE)-1)
+                    stake = STAKE * MARTINGALE[mg_index]
+                    # request proposal + buy
+                    if AUTO_BUY and self.api_token:
+                        req_id = await self.request_proposal_and_buy(stake)
+                        self.pending_buy_req_id = req_id
+                        self.passthrough_map[req_id] = {"type":"proposal", "stake": stake}
+                        # mark that we're waiting for proposal/buy outcome
+                    else:
+                        # If not authorized or AUTO_BUY False, just show suggestion
+                        log(f"DRY RUN: Condition met (ratio {ratio:.2f}). Suggested stake={stake}")
+                        # (optional) reset sliding window to avoid immediate re-fire
+                        self.digits.clear()
+
+        # proposal response (quote for the buy)
+        if "proposal" in data:
+            # proposal returns a token id; we need to buy with that id
+            prop = data["proposal"]
+            req_id = data.get("req_id") or (data.get("passthrough") or {}).get("req_id")
+            if req_id:
+                log(f"Proposal received (req_id={req_id}) -> {prop}")
+            else:
+                log("Proposal received:", prop)
+            # If proposal contains 'id' we can send buy
+            proposal_id = prop.get("id")
+            if proposal_id and AUTO_BUY and self.api_token:
+                # buy the proposal using 'buy' with buy=proposal_id
+                buy_req = {"buy": proposal_id, "price": prop.get("ask_price"), "req_id": self._next_req_id()}
+                buy_req["passthrough"] = {"note": "under8_buy"}
+                await self.ws.send(json.dumps(buy_req))
+                log(f"Sent buy for proposal id {proposal_id} price {prop.get('ask_price')}")
+
+        # buy response -> contains contract_id and whether win/loss at contract close events
+        if "buy" in data:
+            buy = data["buy"]
+            log("Buy response:", buy)
+            # we are now in trade and should monitor result with proposal_open_contract updates
+            self.in_trade = True
+            self.trade_count += 1
+            # After purchase, the server will send updates about this contract via 'proposal_open_contract' messages.
+
+        # contract update messages (status and profit/loss)
+        if "proposal_open_contract" in data:
+            poc = data["proposal_open_contract"]
+            status = poc.get("status")
+            contract_id = poc.get("contract_id")
+            profit = poc.get("profit")  # positive if won, negative if lost (or used buy/buy_price to compute)
+            # note: 'profit' may not always be present depending on message type.
+            log(f"Contract update id={contract_id} status={status} profit={profit}")
+            if status == "sold" or status == "won" or status == "lost" or status == "finished":
+                # evaluate win/loss by comparing 'profit' or 'sell_price' vs spent
+                # a simple heuristic:
+                if profit is not None:
+                    if profit > 0:
+                        self.loss_streak = 0
+                        log(f"TRADE WON: profit={profit}")
+                    else:
+                        self.loss_streak += 1
+                        log(f"TRADE LOST/NO PROFIT: profit={profit} (loss_streak={self.loss_streak})")
+                else:
+                    log("Contract finished (no profit field).")
+                # allow new trades
+                self.in_trade = False
+                # small cooldown to avoid immediate re-entry
+                self.digits.clear()
+
+        # keepalive / error handling / other messages
+        if "error" in data:
+            log("API error:", data["error"])
+
+    async def keepalive_ping(self):
+        # send periodic ping to prevent session timeout
+        while True:
+            await asyncio.sleep(25)
+            try:
+                await self.ws.send(json.dumps({"ping": 1}))
+            except Exception as e:
+                log("Ping error:", e)
+                break
+
+async def main():
+    log("Starting Deriv Under-8 bot")
+    async with websockets.connect(WS_URL) as ws:
+        bot = DerivUnder8Bot(ws, api_token=API_TOKEN)
+        # authorize if token provided
+        await bot.authorize()
+        # subscribe to ticks
+        await bot.subscribe_ticks()
+        # start ping loop
+        asyncio.create_task(bot.keepalive_ping())
+
+        # main receive loop
+        while True:
+            try:
+                msg = await ws.recv()
+            except websockets.ConnectionClosed:
+                log("Connection closed by server")
+                break
+            except Exception as e:
+                log("Recv error:", e)
+                break
+            # handle message
+            await bot.handle_message(msg)
+
+if __name__ == "__main__":
+    try:
+        asyncio.get_event_loop().run_until_complete(main())
+    except KeyboardInterrupt:
+        log("Exiting on user interrupt")
